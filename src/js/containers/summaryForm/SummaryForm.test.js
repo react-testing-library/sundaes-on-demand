@@ -1,8 +1,6 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SummaryForm from '@/js/containers/summaryForm/SummaryForm';
-
-afterEach(cleanup);
 
 const termsAndConditionsText = /terms and conditions/i,
   popoverText = /no ice cream will actually be delivered/i;
