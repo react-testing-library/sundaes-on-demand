@@ -4,10 +4,13 @@ import SummaryForm from '@/js/containers/summaryForm/SummaryForm';
 
 afterEach(cleanup);
 
+const termsAndConditionsText = /terms and conditions/i,
+  popoverText = /no ice cream will actually be delivered/i;
+
 describe('Summary form', () => {
   test('Initial conditions', () => {
     render(<SummaryForm />);
-    const termsAndConditions = screen.getByText(/terms and conditions/i),
+    const termsAndConditions = screen.getByText(termsAndConditionsText),
       confirmButton = screen.getByRole('button', { name: /confirm order/i });
 
     expect(termsAndConditions).not.toBeChecked();
@@ -17,7 +20,7 @@ describe('Summary form', () => {
     const user = userEvent.setup();
 
     render(<SummaryForm />);
-    const termsAndConditions = screen.getByText(/terms and conditions/i),
+    const termsAndConditions = screen.getByText(termsAndConditionsText),
       confirmButton = screen.getByRole('button', { name: /confirm order/i });
 
     await user.click(termsAndConditions);
@@ -27,12 +30,11 @@ describe('Summary form', () => {
     expect(confirmButton).toBeDisabled();
   });
   test('popover response to hover', async () => {
-    const user = userEvent.setup(),
-      popoverText = /no ice cream will actually be delivered/i;
+    const user = userEvent.setup();
 
     render(<SummaryForm />);
 
-    const termsAndConditions = screen.getByText(/terms and conditions/i),
+    const termsAndConditions = screen.getByText(termsAndConditionsText),
       nullPopover = screen.queryByText(popoverText);
 
     //popover starts out hidden
