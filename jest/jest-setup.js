@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
+import { cleanup } from '@testing-library/react';
 //mock service worker setup
 import { server } from '@/jest/mocks/serviceWorker/Server';
-import { cleanup } from '@testing-library/react';
 
 //establish API mocking before all tests
 beforeAll(() => server.listen());
