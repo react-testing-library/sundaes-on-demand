@@ -4,7 +4,9 @@ import { cleanup } from '@testing-library/react';
 import { server } from '@/jest/mocks/serviceWorker/Server';
 
 //establish API mocking before all tests
-beforeAll(() => server.listen());
+beforeAll(() => {
+  server.listen();
+});
 
 /*Reset any request handlers that we may add during the test,
 so they don't affect other test*/
