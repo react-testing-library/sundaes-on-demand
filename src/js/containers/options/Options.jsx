@@ -6,9 +6,11 @@ import Row from 'react-bootstrap/Row';
 //components
 import ScoopOption from '@/js/components/scoopOption/ScoopOption';
 import ToppingOption from '@/js/components/toppingOption/ToppingOption';
+import AlertBanner from '@/js/components/shared/AlertBanner';
 
 const Options = ({ optionType }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]),
+    [isError, setIsError] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -17,10 +19,14 @@ const Options = ({ optionType }) => {
         const res = await axios.get(`http://localhost:3030/${optionType}`);
         setItems(res.data);
       } catch (err) {
-        console.log(err);
+        setIsError(true);
       }
     })();
   }, [optionType]);
+
+  if (isError) {
+    return <AlertBanner />;
+  }
 
   const ItemComponent = optionType === 'scoops' ? ScoopOption : ToppingOption;
 

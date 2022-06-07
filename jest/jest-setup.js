@@ -11,7 +11,7 @@ beforeAll(() => {
 /*Reset any request handlers that we may add during the test,
 so they don't affect other test*/
 afterEach(() => {
-  server.restoreHandlers();
+  server.resetHandlers();
   cleanup();
 });
 
